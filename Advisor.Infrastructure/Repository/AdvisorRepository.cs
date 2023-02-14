@@ -242,7 +242,7 @@ namespace Advisor.Infrastructure.Repository
                     return "Advisor not found";
                 }
                 obj.PasswordResetToken = CreateRandomToken();
-                obj.ResetTokenExpires = DateTime.Now.AddMinutes(2);
+                obj.ResetTokenExpires = DateTime.Now.AddMinutes(20);
                 _userDbContext.SaveChanges();
                 return "Change your password within next 20 minutes.";
             }

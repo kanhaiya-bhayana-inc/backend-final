@@ -1,4 +1,5 @@
-﻿using Advisor.Core.Domain.Models;
+﻿using Advisor.Core.Domain.DTOS;
+using Advisor.Core.Domain.Models;
 using Advisor.Core.Interfaces.Repositories;
 using Advisor.Core.Interfaces.Services;
 using System;
@@ -17,13 +18,13 @@ namespace Advisor.Core.Services
         {
             _userRepository = userRepository;
         }
-        public Task<Users> CreateUser(Users users)
+
+        public string AdvisorAccVerify(string token)
         {
             try
             {
-                _userRepository.CreateUser(users);
-                return Task.FromResult(users);
-
+                var obj = _userRepository.AdvisorAccVerify(token);
+                return obj;
             }
             catch (Exception)
             {
@@ -31,12 +32,12 @@ namespace Advisor.Core.Services
             }
         }
 
-        public Task<List<Users>?> DeleteUser(int id)
+        public Task<Users> CreateUser(AddUserDto request)
         {
             try
             {
-                var user = _userRepository.DeleteUser(id);
-                return Task.FromResult(user);
+                var res = _userRepository.CreateUser(request);
+                return Task.FromResult(res);
             }
             catch (Exception)
             {
@@ -44,12 +45,12 @@ namespace Advisor.Core.Services
             }
         }
 
-        public Task<List<Users>?> GetAllUsers()
+        public string ForgotPasswordUser(string email)
         {
             try
             {
-                var users = _userRepository.GetAllUsers();
-                return Task.FromResult(users);
+                var res = _userRepository.ForgotPasswordUser(email);
+                return res;
             }
             catch (Exception)
             {
@@ -57,12 +58,12 @@ namespace Advisor.Core.Services
             }
         }
 
-        public Task<Users?> GetUserById(int id)
+        public string Login(AuthAdvisorDto request)
         {
             try
             {
-                var user = _userRepository.GetUserById(id);
-                return Task.FromResult(user);
+                var obj = _userRepository.Login(request);
+                return obj;
             }
             catch (Exception)
             {
@@ -70,12 +71,25 @@ namespace Advisor.Core.Services
             }
         }
 
-        public Task<Users?> UpdateUser(Users users, int id)
+        public string ResetPasswordUser(UserResetPasswordDto request)
         {
             try
             {
-                _userRepository.UpdateUser(users, id);
-                return Task.FromResult(users);
+                var obj = _userRepository.ResetPasswordUser(request);
+                return obj;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public UpdateUserDto? UpdateUser(string id, UpdateUserDto request)
+        {
+            try
+            {
+                var obj = _userRepository.UpdateUser(id,request);
+                return obj;
             }
             catch (Exception)
             {
@@ -83,4 +97,5 @@ namespace Advisor.Core.Services
             }
         }
     }
+    
 }

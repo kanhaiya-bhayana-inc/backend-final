@@ -1,4 +1,5 @@
-﻿using Advisor.Core.Domain.Models;
+﻿using Advisor.Core.Domain.DTOS;
+using Advisor.Core.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,16 @@ namespace Advisor.Core.Interfaces.Services
 {
     public interface IUserService
     {
-        Task<Users?> GetUserById(int id);
-        Task<List<Users>?> GetAllUsers();
-        Task<Users> CreateUser(Users users);
-        Task<Users?> UpdateUser(Users users, int id);
-        Task<List<Users>?> DeleteUser(int id);
+        
+        Task<Users> CreateUser(AddUserDto request);
+
+        string Login(AuthAdvisorDto request);
+
+        string AdvisorAccVerify(string token);
+
+        UpdateUserDto? UpdateUser(string id, UpdateUserDto request);
+        string ResetPasswordUser(UserResetPasswordDto request);
+        string ForgotPasswordUser(string email);
+
     }
 }

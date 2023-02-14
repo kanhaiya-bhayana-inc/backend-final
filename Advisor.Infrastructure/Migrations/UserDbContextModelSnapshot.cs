@@ -268,10 +268,24 @@ namespace Advisor.Infrastructure.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("DateTime2");
 
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("PasswordResetToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("VARCHAR");
+
+                    b.Property<DateTime?>("ResetTokenExpires")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("RoleID")
                         .HasColumnType("int");
@@ -286,6 +300,12 @@ namespace Advisor.Infrastructure.Migrations
                     b.Property<string>("State")
                         .HasMaxLength(20)
                         .HasColumnType("VARCHAR");
+
+                    b.Property<string>("VerificationToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("VerifiedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("UserID");
 
