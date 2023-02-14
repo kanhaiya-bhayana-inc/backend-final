@@ -36,6 +36,9 @@ namespace Advisor.Infrastructure.Repository
         {
             try
             {
+                if (_userDbContext.AdvisorInfos.Any(u => u.Email == request.Email)) {
+                    return null;
+                }
                 //AdvisorInfo advisorInfo = new AdvisorInfo();
                 CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
                 AdvisorInfo advisorInfo = new AdvisorInfo()
@@ -43,7 +46,8 @@ namespace Advisor.Infrastructure.Repository
                     Username = request.Username,
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt,
-                    Email = request.Email
+                    Email = request.Email,
+                    VerificationToken= CreateRandomToken()
                 };
                 _userDbContext.AdvisorInfos.Add(advisorInfo);
                 _userDbContext.SaveChanges();
@@ -113,7 +117,7 @@ namespace Advisor.Infrastructure.Repository
             try
             {
                 
-                var hero =  _userDbContext.AdvisorInfos.Find(id);
+                var hero =  _userDbContext.AdvisorInfos.Find(id); 
                 if (hero is null)
                     return null;
                 
@@ -155,6 +159,10 @@ namespace Advisor.Infrastructure.Repository
             if (!VerifyPasswordHash(requrest.Password, advObj.PasswordHash, advObj.PasswordSalt))
             {
                 return "Wrong password.";
+            }
+            if (advObj.VerifiedAt== null)
+            {
+                return "Not Verified yet";
             }
             string token = CreateToken(advObj);
 
@@ -202,6 +210,72 @@ namespace Advisor.Infrastructure.Repository
             {
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 return computedHash.SequenceEqual(passwordHash);
+            }
+        }
+
+        private string CreateRandomToken()
+        {
+            return Convert.ToHexString(RandomNumberGenerator.GetBytes(64));
+        }
+
+        public string AdvisorAccVerify(string token)
+        {
+            var obj = _userDbContext.AdvisorInfos.FirstOrDefault(u => u.VerificationToken== token);
+            if (obj == null)
+            {
+                return "Invalid Token";
+            }
+
+            obj.VerifiedAt= DateTime.Now;
+            _userDbContext.SaveChanges();
+
+            return "Advisor Verified Successfully";
+        }
+
+        public string ForgotPasswordAdv(string email)
+        {
+            try
+            {
+                var obj = _userDbContext.AdvisorInfos.FirstOrDefault(u =>u.Email== email);
+                if (obj == null)
+                {
+                    return "Advisor not found";
+                }
+                obj.PasswordResetToken = CreateRandomToken();
+                obj.ResetTokenExpires = DateTime.Now.AddMinutes(2);
+                _userDbContext.SaveChanges();
+                return "Change your password within next 20 minutes.";
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
+
+        public string ResetPasswordAdv(AdvResetPasswordDto request)
+        {
+            try
+            {
+                var obj = _userDbContext.AdvisorInfos.FirstOrDefault(u => u.PasswordResetToken == request.token);
+                if (obj == null || obj.ResetTokenExpires < DateTime.Now)
+                {
+                    return "Token Invalid or expired, try again.";
+                }
+
+                CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+
+                obj.PasswordHash= passwordHash;
+                obj.PasswordSalt= passwordSalt;
+                obj.PasswordResetToken = null;
+                obj.ResetTokenExpires = null;
+
+                _userDbContext.SaveChanges();
+
+                return "Password successfully reset.";
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

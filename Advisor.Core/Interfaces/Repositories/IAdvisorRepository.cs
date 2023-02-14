@@ -1,8 +1,7 @@
 ﻿
 using Advisor.Core.Domain.DTOS;
 using Advisor.Core.Domain.Models;
-
-
+using System.Reflection.Metadata;
 
 namespace Advisor.Core.Interfaces.Repositories
 {
@@ -16,5 +15,11 @@ namespace Advisor.Core.Interfaces.Repositories
 
         string Login(AuthAdvisorDto request);
         public string GetMyName();
+
+        string AdvisorAccVerify(string token);
+
+        string ForgotPasswordAdv(string email);
+
+        string ResetPasswordAdv(AdvResetPasswordDto request);
     }
 }

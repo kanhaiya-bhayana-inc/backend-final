@@ -37,7 +37,11 @@ namespace Advisor.API.Controllers
         public async Task<ActionResult<AdvisorInfo>> CreateAdvisor(AdviserDto request)
         {
             var result = await _advisorService.CreateAdvisor(request); 
-            return Ok(result);
+            if (result == null)
+            {
+                return BadRequest("User already exist with this email."); ;
+            }
+            return Ok("Advisor successfully created!");
         }
 
         [HttpGet("{id}")]
@@ -92,12 +96,42 @@ namespace Advisor.API.Controllers
         public async Task<ActionResult<string>> Login(AuthAdvisorDto request)
         {
             var result = _advisorService.Login(request);
-            if (result.Equals("Advisor not found.") || result.Equals("Wrong password."))
+            if (result.Equals("Advisor not found.") || result.Equals("Wrong password.") || result.Equals("Not Verified yet"))
                 return NotFound(result);
 
             return Ok(result);
         }
-        
+
+        [HttpPost("VerifyAdvisorAccount")]
+
+        public async Task<ActionResult<string>> AdvisorAccVerify(string token)
+        {
+            var res = _advisorService.AdvisorAccVerify(token);
+            if (res.Equals("Invalid Token"))
+                return BadRequest(res);
+
+            return Ok(res);
+        }
+
+
+        [HttpPost("forgot-password")]
+        public async Task<ActionResult<string>> ForgotPasswordAdv(string emial)
+        {
+            var res = _advisorService.ForgotPasswordAdv(emial);
+            if (res.Equals("Advisor not found"))
+                return BadRequest(res);
+            return Ok(res);
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<ActionResult<string>> ResetPasswordAdv(AdvResetPasswordDto request)
+        {
+            var res = _advisorService.ResetPasswordAdv(request);
+            if (res.Equals("Token Invalid or expired, try again."))
+                return BadRequest(res);
+            return Ok(res);
+        }
+
 
     }
 }

@@ -19,5 +19,9 @@ namespace Advisor.Core.Interfaces.Services
 
         public string GetMyName();
 
+        string AdvisorAccVerify(string token);
+        string ForgotPasswordAdv(string email);
+
+        string ResetPasswordAdv(AdvResetPasswordDto request);
     }
 }

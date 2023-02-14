@@ -110,5 +110,43 @@ namespace Advisor.Core.Services
                 throw;
             }
         }
+
+        public string AdvisorAccVerify(string token)
+        {
+            try
+            {
+                var obj = _advisorRepository.AdvisorAccVerify(token);
+                return obj;
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
+
+        public string ForgotPasswordAdv(string email)
+        {
+            try
+            {
+                var obj = _advisorRepository.ForgotPasswordAdv(email);
+                return obj;
+            }
+            catch(Exception ) {
+                throw;
+            }
+        }
+
+        public string ResetPasswordAdv(AdvResetPasswordDto request)
+        {
+            try
+            {
+                var obj = _advisorRepository.ResetPasswordAdv(request);
+                return obj;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
