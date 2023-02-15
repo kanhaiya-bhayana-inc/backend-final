@@ -18,6 +18,7 @@ namespace Advisor.Core.Interfaces.Repositories
 
         string ResetPasswordUser(UserResetPasswordDto request);
         string ForgotPasswordUser(string email);
+        string ChangePassword();
 
     }
 }

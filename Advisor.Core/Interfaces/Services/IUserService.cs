@@ -20,6 +20,7 @@ namespace Advisor.Core.Interfaces.Services
         UpdateUserDto? UpdateUser(string id, UpdateUserDto request);
         string ResetPasswordUser(UserResetPasswordDto request);
         string ForgotPasswordUser(string email);
+        string ChangePassword();
 
     }
 }

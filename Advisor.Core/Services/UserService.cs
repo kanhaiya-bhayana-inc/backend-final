@@ -32,6 +32,19 @@ namespace Advisor.Core.Services
             }
         }
 
+        public string ChangePassword()
+        {
+            try
+            {
+                var obj = _userRepository.ChangePassword();
+                return obj;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public Task<Users> CreateUser(AddUserDto request)
         {
             try

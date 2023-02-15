@@ -2,6 +2,7 @@
 using Advisor.Core.Domain.Models;
 using Advisor.Core.Interfaces.Services;
 using Advisor.Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -78,6 +79,13 @@ namespace Advisor.API.Controllers
             var res = _userService.ForgotPasswordUser(emial);
             if (res.Equals("Advisor not found"))
                 return BadRequest(res);
+            return Ok(res);
+        }
+
+        [HttpGet("change-password"), Authorize]
+        public ActionResult<string> ChangePassword()
+        {
+            var res = _userService.ChangePassword();
             return Ok(res);
         }
 

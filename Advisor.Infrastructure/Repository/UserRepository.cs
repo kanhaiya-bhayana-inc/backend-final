@@ -76,7 +76,7 @@ namespace Advisor.Infrastructure.Repository
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Email, objUser.Email),
-                new Claim(ClaimTypes.Role, "Admin")
+                new Claim(ClaimTypes.Role, "Advisor")
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
@@ -252,7 +252,7 @@ namespace Advisor.Infrastructure.Repository
 
                 _userDbContext.SaveChanges();
 
-                return "Password successfully reset.";
+                return "Password successfully updated.";
             }
             catch (Exception)
             {
@@ -270,14 +270,38 @@ namespace Advisor.Infrastructure.Repository
                     return "Advisor not found";
                 }
                 obj.PasswordResetToken = CreateRandomToken();
-                obj.ResetTokenExpires = DateTime.Now.AddMinutes(2);
+                obj.ResetTokenExpires = DateTime.Now.AddMinutes(20);
                 _userDbContext.SaveChanges();
-                return "Change your password within next 2 minutes.";
+                return "Change your password within 20 minutes.";
             }
             catch (Exception)
             {
                 throw;
             }
+        }
+
+        public string ChangePassword()
+        {
+            try
+            {
+                var email = string.Empty;
+                if (_httpContextAccessor.HttpContext != null)
+                {
+                    email = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).ToString();
+                    email = email.Split(' ')[1];
+                }
+                var obj = _userDbContext.Usersd.FirstOrDefault(u => u.Email == email);
+                if (obj == null)
+                {
+                    return "Advisor email is not found in the database or some error has occured!";
+                }
+                obj.PasswordResetToken = CreateRandomToken();
+                obj.ResetTokenExpires = DateTime.Now.AddMinutes(20);
+                _userDbContext.SaveChanges();
+                return $"Check you email: {email} inbox for changing the password.";
+                
+            }
+            catch (Exception) { throw; }
         }
     }
 }
