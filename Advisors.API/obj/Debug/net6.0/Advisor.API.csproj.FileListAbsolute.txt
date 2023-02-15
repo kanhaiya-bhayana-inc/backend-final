@@ -89,8 +89,6 @@ C:\Users\kanhaiya.bhayana\Downloads\AdvisorSolution\Advisors.API\obj\Debug\net6.
 C:\Users\kanhaiya.bhayana\Downloads\AdvisorSolution\Advisors.API\obj\Debug\net6.0\Advisor.API.pdb
 C:\Users\kanhaiya.bhayana\Downloads\AdvisorSolution\Advisors.API\obj\Debug\net6.0\Advisor.API.genruntimeconfig.cache
 C:\Users\kanhaiya.bhayana\Downloads\AdvisorSolution\Advisors.API\obj\Debug\net6.0\ref\Advisor.API.dll
-C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisors.API\bin\Debug\net6.0\appsettings.Development.json
-C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisors.API\bin\Debug\net6.0\appsettings.json
 C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisors.API\bin\Debug\net6.0\Advisor.API.exe
 C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisors.API\bin\Debug\net6.0\Advisor.API.deps.json
 C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisors.API\bin\Debug\net6.0\Advisor.API.runtimeconfig.json
@@ -181,3 +179,5 @@ C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-mast
 C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisors.API\obj\Debug\net6.0\Advisor.API.genruntimeconfig.cache
 C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisors.API\obj\Debug\net6.0\ref\Advisor.API.dll
 C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisors.API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisors.API\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisors.API\bin\Debug\net6.0\appsettings.json

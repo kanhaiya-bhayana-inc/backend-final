@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace Advisor.Core.Domain.Models
 {
@@ -21,6 +22,9 @@ namespace Advisor.Core.Domain.Models
         [Required]
         [Column(TypeName = "Tinyint")]
         public int Active { get; set; }
+
+        [JsonIgnore]
+        List<Users> Users { get; set; } = new List<Users>();
     }
 }
 

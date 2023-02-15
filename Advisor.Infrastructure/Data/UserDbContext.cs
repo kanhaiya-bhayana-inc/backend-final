@@ -23,13 +23,13 @@ namespace Advisor.Infrastructure.Data
 
         public DbSet<AdvisorInfo>? AdvisorInfos { get; set; }
 
+        public DbSet<AdvisorClient>? advisorClients { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Users>().HasMany(t => t.AdvisorList).WithOne(m => m.Advisor).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Users>().HasMany(t => t.ClientList).WithOne(m => m.Client).OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Users>()
-                .Property(u => u.SortName)
-                .HasComputedColumnSql("[LastName] + ' ' + [FirstName]");
         }
 
     }

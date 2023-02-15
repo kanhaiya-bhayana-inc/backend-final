@@ -14,10 +14,8 @@ namespace Advisor.Core.Domain.Models
         [Key]
         public int UserID { get; set; }
 
-        [Display(Name = "Role")]
-        public virtual int RoleID { get; set; }
-        [ForeignKey("RoleID")]
-        public virtual Role? Roles { get; set; }
+        public Role Role { get; set; } = null!;
+        public int RoleID { get; set; }
 
 
         [Column(TypeName = "VARCHAR")]
@@ -112,5 +110,11 @@ namespace Advisor.Core.Domain.Models
         public string? PasswordResetToken { get; set; }
 
         public DateTime? ResetTokenExpires { get; set; }
+
+        public List<InvestorInfo>? investorInfos { get; set; }
+        public List<AdvisorClient>? AdvisorList { get; set; }
+        public List<AdvisorClient>? ClientList { get; set; }
+
+
     }
 }

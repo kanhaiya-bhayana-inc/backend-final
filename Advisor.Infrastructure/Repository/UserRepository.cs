@@ -58,7 +58,8 @@ namespace Advisor.Infrastructure.Repository
                     CreatedDate = DateTime.Now,
                     ModifiedBy = advId,
                     ModifiedDate = DateTime.Now,
-                    DeletedFlag=0,
+                    SortName = request.LastName + ", " + request.FirstName,
+                DeletedFlag =0,
                     VerificationToken = CreateRandomToken()
                 };
                 _userDbContext.Usersd.Add(users);
@@ -221,6 +222,7 @@ namespace Advisor.Infrastructure.Repository
                 objuser.Company = request.Company;
                 objuser.Phone = request.Phone;
                 objuser.ModifiedDate = DateTime.Now;
+                objuser.SortName = request.LastName + ", " + request.FirstName;
 
                 _userDbContext.SaveChanges();
                 /* AdvisorInfoToReturn toreturn = new AdvisorInfoToReturn();

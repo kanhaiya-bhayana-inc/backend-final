@@ -14,10 +14,8 @@ namespace Advisor.Core.Domain.Models
         [Key]
         public int InvestorInfoID { get; set; }
 
-        [Display(Name = "Users")]
-        public virtual int UserID { get; set; }
-        [ForeignKey("UserID")]
-        public virtual Users? Userss { get; set; }
+        public Users User { get; set; } = null!;
+        public int UserID { get; set; }
 
         [Column(TypeName = "VARCHAR")]
         [StringLength(200)]
@@ -46,5 +44,7 @@ namespace Advisor.Core.Domain.Models
         {
             get { return (DeletedFlag == 1); }
         }
+
+        public List<InvestmentStrategy>? investmentStrategies { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Advisor.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initialsD : Migration
+    public partial class advcliInitiald : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -80,7 +80,7 @@ namespace Advisor.Infrastructure.Migrations
                     LastName = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: false),
                     FirstName = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: false),
                     Company = table.Column<string>(type: "VARCHAR(150)", maxLength: 150, nullable: true),
-                    SortName = table.Column<string>(type: "VARCHAR(100)", maxLength: 100, nullable: false, computedColumnSql: "[LastName] + ' ' + [FirstName]"),
+                    SortName = table.Column<string>(type: "VARCHAR(100)", maxLength: 100, nullable: false),
                     Active = table.Column<byte>(type: "Tinyint", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "DateTime2", nullable: false),
                     ModifiedBy = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: true),
@@ -102,6 +102,30 @@ namespace Advisor.Infrastructure.Migrations
                         principalTable: "Roles",
                         principalColumn: "RoleID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "advisorClients",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AdvisorID = table.Column<int>(type: "int", nullable: false),
+                    ClientID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_advisorClients", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_advisorClients_Usersd_AdvisorID",
+                        column: x => x.AdvisorID,
+                        principalTable: "Usersd",
+                        principalColumn: "UserID");
+                    table.ForeignKey(
+                        name: "FK_advisorClients_Usersd_ClientID",
+                        column: x => x.ClientID,
+                        principalTable: "Usersd",
+                        principalColumn: "UserID");
                 });
 
             migrationBuilder.CreateTable(
@@ -135,7 +159,7 @@ namespace Advisor.Infrastructure.Migrations
                 {
                     InvestmentStrategyID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    InvestorInfoID = table.Column<int>(type: "int", nullable: false),
+                    UserID = table.Column<int>(type: "int", nullable: false),
                     StrategyName = table.Column<string>(type: "VARCHAR(200)", maxLength: 200, nullable: false),
                     AccountID = table.Column<string>(type: "VARCHAR(6)", maxLength: 6, nullable: false),
                     ModelAPLID = table.Column<string>(type: "VARCHAR(6)", maxLength: 6, nullable: false),
@@ -143,7 +167,8 @@ namespace Advisor.Infrastructure.Migrations
                     InvestmentTypeID = table.Column<int>(type: "int", nullable: false),
                     ModifiedBy = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "DateTime2", nullable: true),
-                    DeletedFlag = table.Column<int>(type: "int", nullable: false)
+                    DeletedFlag = table.Column<int>(type: "int", nullable: false),
+                    InvestorInfoID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -158,9 +183,24 @@ namespace Advisor.Infrastructure.Migrations
                         name: "FK_investmentStrategies_InvestorInfos_InvestorInfoID",
                         column: x => x.InvestorInfoID,
                         principalTable: "InvestorInfos",
-                        principalColumn: "InvestorInfoID",
+                        principalColumn: "InvestorInfoID");
+                    table.ForeignKey(
+                        name: "FK_investmentStrategies_Usersd_UserID",
+                        column: x => x.UserID,
+                        principalTable: "Usersd",
+                        principalColumn: "UserID",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_advisorClients_AdvisorID",
+                table: "advisorClients",
+                column: "AdvisorID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_advisorClients_ClientID",
+                table: "advisorClients",
+                column: "ClientID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_investmentStrategies_InvestmentTypeID",
@@ -171,6 +211,11 @@ namespace Advisor.Infrastructure.Migrations
                 name: "IX_investmentStrategies_InvestorInfoID",
                 table: "investmentStrategies",
                 column: "InvestorInfoID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_investmentStrategies_UserID",
+                table: "investmentStrategies",
+                column: "UserID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_InvestorInfos_UserID",
@@ -186,6 +231,9 @@ namespace Advisor.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "advisorClients");
+
             migrationBuilder.DropTable(
                 name: "AdvisorInfos");
 

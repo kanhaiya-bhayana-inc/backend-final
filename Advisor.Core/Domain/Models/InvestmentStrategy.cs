@@ -14,10 +14,8 @@ namespace Advisor.Core.Domain.Models
         [Key]
         public int InvestmentStrategyID { get; set; }
 
-        [Display(Name = "InvestorInfo")]
-        public virtual int InvestorInfoID { get; set; }
-        [ForeignKey("InvestorInfoID")]
-        public virtual InvestorInfo? InvestorInfos { get; set; }
+        public Users User { get; set; } = null!;
+        public int UserID { get; set; }
 
         [Required]
         [Column(TypeName = "VARCHAR")]

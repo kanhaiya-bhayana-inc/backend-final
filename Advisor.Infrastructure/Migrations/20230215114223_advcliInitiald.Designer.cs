@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Advisor.Infrastructure.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20230214104029_initialsD")]
-    partial class initialsD
+    [Migration("20230215114223_advcliInitiald")]
+    partial class advcliInitiald
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,29 @@ namespace Advisor.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Advisor.Core.Domain.Models.AdvisorClient", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("AdvisorID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClientID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("AdvisorID");
+
+                    b.HasIndex("ClientID");
+
+                    b.ToTable("advisorClients");
+                });
 
             modelBuilder.Entity("Advisor.Core.Domain.Models.AdvisorInfo", b =>
                 {
@@ -90,7 +113,7 @@ namespace Advisor.Infrastructure.Migrations
                     b.Property<int>("InvestmentTypeID")
                         .HasColumnType("int");
 
-                    b.Property<int>("InvestorInfoID")
+                    b.Property<int?>("InvestorInfoID")
                         .HasColumnType("int");
 
                     b.Property<string>("ModelAPLID")
@@ -110,11 +133,16 @@ namespace Advisor.Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("VARCHAR");
 
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
                     b.HasKey("InvestmentStrategyID");
 
                     b.HasIndex("InvestmentTypeID");
 
                     b.HasIndex("InvestorInfoID");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("investmentStrategies");
                 });
@@ -295,10 +323,8 @@ namespace Advisor.Infrastructure.Migrations
 
                     b.Property<string>("SortName")
                         .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasMaxLength(100)
-                        .HasColumnType("VARCHAR")
-                        .HasComputedColumnSql("[LastName] + ' ' + [FirstName]");
+                        .HasColumnType("VARCHAR");
 
                     b.Property<string>("State")
                         .HasMaxLength(20)
@@ -317,6 +343,25 @@ namespace Advisor.Infrastructure.Migrations
                     b.ToTable("Usersd");
                 });
 
+            modelBuilder.Entity("Advisor.Core.Domain.Models.AdvisorClient", b =>
+                {
+                    b.HasOne("Advisor.Core.Domain.Models.Users", "Advisor")
+                        .WithMany("AdvisorList")
+                        .HasForeignKey("AdvisorID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Advisor.Core.Domain.Models.Users", "Client")
+                        .WithMany("ClientList")
+                        .HasForeignKey("ClientID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Advisor");
+
+                    b.Navigation("Client");
+                });
+
             modelBuilder.Entity("Advisor.Core.Domain.Models.InvestmentStrategy", b =>
                 {
                     b.HasOne("Advisor.Core.Domain.Models.InvestmentType", "InvestmentTypes")
@@ -325,37 +370,55 @@ namespace Advisor.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Advisor.Core.Domain.Models.InvestorInfo", "InvestorInfos")
-                        .WithMany()
-                        .HasForeignKey("InvestorInfoID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Advisor.Core.Domain.Models.InvestorInfo", null)
+                        .WithMany("investmentStrategies")
+                        .HasForeignKey("InvestorInfoID");
 
-                    b.Navigation("InvestmentTypes");
-
-                    b.Navigation("InvestorInfos");
-                });
-
-            modelBuilder.Entity("Advisor.Core.Domain.Models.InvestorInfo", b =>
-                {
-                    b.HasOne("Advisor.Core.Domain.Models.Users", "Userss")
+                    b.HasOne("Advisor.Core.Domain.Models.Users", "User")
                         .WithMany()
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Userss");
+                    b.Navigation("InvestmentTypes");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Advisor.Core.Domain.Models.InvestorInfo", b =>
+                {
+                    b.HasOne("Advisor.Core.Domain.Models.Users", "User")
+                        .WithMany("investorInfos")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Advisor.Core.Domain.Models.Users", b =>
                 {
-                    b.HasOne("Advisor.Core.Domain.Models.Role", "Roles")
+                    b.HasOne("Advisor.Core.Domain.Models.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Roles");
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("Advisor.Core.Domain.Models.InvestorInfo", b =>
+                {
+                    b.Navigation("investmentStrategies");
+                });
+
+            modelBuilder.Entity("Advisor.Core.Domain.Models.Users", b =>
+                {
+                    b.Navigation("AdvisorList");
+
+                    b.Navigation("ClientList");
+
+                    b.Navigation("investorInfos");
                 });
 #pragma warning restore 612, 618
         }
