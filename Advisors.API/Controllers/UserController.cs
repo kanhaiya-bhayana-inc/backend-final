@@ -85,6 +85,7 @@ namespace Advisor.API.Controllers
         [HttpGet("change-password"), Authorize]
         public ActionResult<string> ChangePassword()
         {
+            //used
             var res = _userService.ChangePassword();
             return Ok(res);
         }
