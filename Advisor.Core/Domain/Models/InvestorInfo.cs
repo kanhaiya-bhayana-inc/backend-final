@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Text.Json.Serialization;
 
 namespace Advisor.Core.Domain.Models
 {
@@ -44,7 +45,8 @@ namespace Advisor.Core.Domain.Models
         {
             get { return (DeletedFlag == 1); }
         }
-
+        
+        [JsonIgnore]
         public List<InvestmentStrategy>? investmentStrategies { get; set; }
     }
 }
