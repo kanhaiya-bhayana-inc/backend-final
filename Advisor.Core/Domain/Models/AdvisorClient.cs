@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace Advisor.Core.Domain.Models
 {
@@ -13,11 +14,8 @@ namespace Advisor.Core.Domain.Models
         [Key]
         public int ID { get; set; }
 
-        [ForeignKey("AdvisorID")]
-        public virtual Users Advisor { get; set; }
-        [ForeignKey("ClientID")]
-        public virtual Users Client { get; set; }
-
+        public int AdvisorID { get; set; }
+        public int ClientID { get; set; }
 
     }
 }

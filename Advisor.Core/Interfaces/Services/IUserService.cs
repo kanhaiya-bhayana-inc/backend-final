@@ -10,8 +10,13 @@ namespace Advisor.Core.Interfaces.Services
 {
     public interface IUserService
     {
-        
+        Task<GetUserDto?> GetUserByAuth();
+        Task<List<GetAllClientDTOs>?> GetAllClients(int id);
+        Task<List<int>?> GetAllIDS(int id);
+
+
         Task<Users> CreateUser(AddUserDto request);
+        string CreateClient(AddUserDto request);
 
         string Login(AuthAdvisorDto request);
 

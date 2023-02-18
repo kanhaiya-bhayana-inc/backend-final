@@ -20,6 +20,14 @@ namespace Advisor.API.Controllers
             _userService = userService;
         }
 
+        [HttpGet("get-user-auth"),Authorize] // shivam
+
+        public async Task<ActionResult<GetUserDto>> GetUserByAuth()
+        {
+            var result = await _userService.GetUserByAuth();
+            if (result == null) { return NotFound("User doesn't exists."); }
+            return Ok(result);
+        }
 
         [HttpPost("add-user")]
         public async Task<ActionResult<Users>> CreateUser(AddUserDto request)
@@ -28,6 +36,17 @@ namespace Advisor.API.Controllers
             if (result is null)
             {
                 return BadRequest("User already Exist");
+            }
+            return Ok(result);
+        }
+
+        [HttpPost("add-client"),Authorize]
+        public async Task<ActionResult<string>> CreateClient(AddUserDto request)
+        {
+            var result =  _userService.CreateClient(request);
+            if (result.Equals("Without advisor client cann't be created.") || result.Equals("Some error occured, try again, or contact advisor.") || result.Equals("this client already created by another advisor, try another one."))
+            {
+                return BadRequest(result);
             }
             return Ok(result);
         }
@@ -88,6 +107,21 @@ namespace Advisor.API.Controllers
             //used
             var res = _userService.ChangePassword();
             return Ok(res);
+        }
+
+        [HttpGet("get-all-clients/{id}"),Authorize]
+        public async Task<ActionResult<List<GetAllClientDTOs>>> GetAllClients(int id)
+        {
+            var obj = await _userService.GetAllClients(id);
+            if (obj == null)
+                return NotFound("Advisor Not found");
+            return Ok(obj) ;
+        }
+
+        [HttpGet("get-all-ids/{id}")]
+        public async Task<ActionResult<List<int>>> GetAllIDS(int id)
+        {
+            return await _userService.GetAllIDS(id);
         }
 
     }

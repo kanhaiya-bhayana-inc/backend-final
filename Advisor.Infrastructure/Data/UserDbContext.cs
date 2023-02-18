@@ -25,12 +25,7 @@ namespace Advisor.Infrastructure.Data
 
         public DbSet<AdvisorClient>? advisorClients { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Users>().HasMany(t => t.AdvisorList).WithOne(m => m.Advisor).OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<Users>().HasMany(t => t.ClientList).WithOne(m => m.Client).OnDelete(DeleteBehavior.NoAction);
-
-        }
+      
 
     }
 }

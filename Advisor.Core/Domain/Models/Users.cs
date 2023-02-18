@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Text.Json.Serialization;
 
 namespace Advisor.Core.Domain.Models
 {
@@ -111,10 +112,9 @@ namespace Advisor.Core.Domain.Models
 
         public DateTime? ResetTokenExpires { get; set; }
 
+        [JsonIgnore]
         public List<InvestorInfo>? investorInfos { get; set; }
-        public List<AdvisorClient>? AdvisorList { get; set; }
-        public List<AdvisorClient>? ClientList { get; set; }
-
+       
 
     }
 }

@@ -4,6 +4,7 @@ using Advisor.Core.Interfaces.Repositories;
 using Advisor.Infrastructure.Data;
 using Azure.Core;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -77,6 +78,7 @@ namespace Advisor.Infrastructure.Repository
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Email, objUser.Email),
+                //new Claim(ClaimTypes.Sid, objUser.AdvisorID),
                 new Claim(ClaimTypes.Role, "Advisor")
             };
 
@@ -141,6 +143,19 @@ namespace Advisor.Infrastructure.Repository
             if (res == true)
             {
                 CreateAdvId();
+            }
+            return newId;
+        }
+
+        private string createClientID()
+        {
+            const string chars = "a1bc2de3fg5h6i7j4k8l9mn0opqrstuvwxyz";
+            var newId = new string(Enumerable.Repeat(chars, 6)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+            var res = _userDbContext.Usersd.Any(u => u.AdvisorID == newId);
+            if (res == true)
+            {
+                createClientID();
             }
             return newId;
         }
@@ -304,6 +319,156 @@ namespace Advisor.Infrastructure.Repository
                 
             }
             catch (Exception) { throw; }
+        }
+
+        public string CreateClient(AddUserDto request)
+        {
+            try
+            {
+                string errMsg = "Without advisor client cann't be created.";
+                if (_userDbContext.Usersd.Any(u => u.Email == request.Email)) { return "this client already created by another advisor, try another one."; }
+                CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+                var advId = string.Empty;
+                if (_httpContextAccessor.HttpContext != null)
+                {
+                    advId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).ToString();
+                    advId = advId.Split(' ')[1];
+                }
+                var newObjadvId = _userDbContext.Usersd.FirstOrDefault(x => x.Email == advId);
+                if (newObjadvId == null) { return errMsg; }
+                advId = newObjadvId.AdvisorID;
+                var clntID = createClientID();
+                Users users = new Users()
+                {
+                    Email = request.Email,
+                    FirstName = request.FirstName,
+                    LastName = request.LastName,
+                    Address = request.Address,
+                    State = request.State,
+                    City = request.City,
+                    Company = request.Company,
+                    Phone = request.Phone,
+                    PasswordHash = passwordHash,
+                    PasswordSalt = passwordSalt,
+                    RoleID = 3,
+                    ClientID = clntID,
+                    AgentID = CreateAgentId(),
+                    Active = 1,
+                    CreatedDate = DateTime.Now,
+                    ModifiedBy = advId,
+                    ModifiedDate = DateTime.Now,
+                    SortName = request.LastName + ", " + request.FirstName,
+                    DeletedFlag = 0,
+                    VerificationToken = CreateRandomToken()
+                };
+                _userDbContext.Usersd.Add(users);
+                _userDbContext.SaveChanges();
+                var clintId = _userDbContext.Usersd.FirstOrDefault(x => x.AdvisorID == advId);
+                if (clintId == null) { return errMsg; }
+                var nclintId = clintId.UserID;
+                var advIdn = _userDbContext.Usersd.FirstOrDefault(x => x.ClientID == clntID);
+                if (advIdn == null) { return errMsg; }
+                var nadvId = advIdn.UserID;
+
+                AdvisorClient advisorClients = new AdvisorClient();
+                advisorClients.AdvisorID = newObjadvId.UserID;
+                advisorClients.ClientID = users.UserID;
+                _userDbContext.advisorClients.Add(advisorClients);
+                _userDbContext.SaveChanges();
+
+                //Console.WriteLine("agentID is " + CreateAgentId());
+                return "Client Created Successfully.";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public GetUserDto? GetUserByAuth()  // shivam
+        {
+            try
+            {
+                var email = string.Empty;
+                if (_httpContextAccessor.HttpContext != null)
+                {
+                    email = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).ToString();
+                    email = email.Split(' ')[1];
+                }
+                var objn = _userDbContext.Usersd.FirstOrDefault(u => u.Email == email);
+                if (objn == null)
+                {
+                    return null;
+                }
+                var res = _userDbContext.Usersd.FirstOrDefault(x => x.Email == email);
+                if (res == null) { return null; }
+                GetUserDto obj = new GetUserDto();
+                obj.UserID = res.UserID;
+                obj.SortName = res.SortName;
+                obj.Email = res.Email;
+                obj.AdvisorID = res.AdvisorID;
+                obj.Phone = res.Phone;
+                return obj;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<GetAllClientDTOs>? GetAllClients(int id)
+        {
+            try
+            {
+                /*var adv = _context.Users.First(x => x.Email == email);
+                var advid = adv.UserID;*/
+                var flag = _userDbContext.advisorClients.Any(x => x.ID == id);
+                if (!flag) { return null; }
+
+                List<AdvisorClient> clients = _userDbContext.advisorClients.Where(x => x.AdvisorID == id).ToList();
+                
+                List<int> clientids = new List<int>();
+                foreach (var x in clients)
+                {
+                    clientids.Add(x.ClientID);
+                }
+                List<GetAllClientDTOs> list = new List<GetAllClientDTOs>();
+                foreach (int i in clientids)
+                {
+                    GetAllClientDTOs clientInfo = new GetAllClientDTOs();
+                    Users Client = _userDbContext.Usersd.First(c => c.UserID == i);
+                    clientInfo.UserID = i;
+                    clientInfo.Address = Client.Address;
+                    clientInfo.ClientID = Client.ClientID;
+                    clientInfo.Email = Client.Email;
+                    clientInfo.SortName = Client.SortName;
+                    clientInfo.Phone = Client.Phone;
+                    list.Add(clientInfo);
+                }
+                
+                return list;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<int>? GetAllIDS(int id)
+        {
+
+            try
+            {
+                List<int> ids = new List<int>();
+                return ids;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
         }
     }
 }

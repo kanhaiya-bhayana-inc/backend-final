@@ -10,7 +10,9 @@ namespace Advisor.Core.Interfaces.Repositories
 {
     public interface IUserRepository
     {
+        GetUserDto? GetUserByAuth();
         Users CreateUser(AddUserDto request);
+        string CreateClient(AddUserDto request);
         string Login(AuthAdvisorDto request);
         string AdvisorAccVerify(string token);
 
@@ -19,6 +21,10 @@ namespace Advisor.Core.Interfaces.Repositories
         string ResetPasswordUser(UserResetPasswordDto request);
         string ForgotPasswordUser(string email);
         string ChangePassword();
+
+        List<GetAllClientDTOs>? GetAllClients(int id);
+
+        List<int>? GetAllIDS(int id);
 
     }
 }

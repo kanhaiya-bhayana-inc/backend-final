@@ -6,11 +6,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Advisor.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class advcliInitiald : Migration
+    public partial class initials : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "advisorClients",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AdvisorID = table.Column<int>(type: "int", nullable: false),
+                    ClientID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_advisorClients", x => x.ID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AdvisorInfos",
                 columns: table => new
@@ -105,30 +119,6 @@ namespace Advisor.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "advisorClients",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AdvisorID = table.Column<int>(type: "int", nullable: false),
-                    ClientID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_advisorClients", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_advisorClients_Usersd_AdvisorID",
-                        column: x => x.AdvisorID,
-                        principalTable: "Usersd",
-                        principalColumn: "UserID");
-                    table.ForeignKey(
-                        name: "FK_advisorClients_Usersd_ClientID",
-                        column: x => x.ClientID,
-                        principalTable: "Usersd",
-                        principalColumn: "UserID");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "InvestorInfos",
                 columns: table => new
                 {
@@ -191,16 +181,6 @@ namespace Advisor.Infrastructure.Migrations
                         principalColumn: "UserID",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_advisorClients_AdvisorID",
-                table: "advisorClients",
-                column: "AdvisorID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_advisorClients_ClientID",
-                table: "advisorClients",
-                column: "ClientID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_investmentStrategies_InvestmentTypeID",

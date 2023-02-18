@@ -38,10 +38,6 @@ namespace Advisor.Infrastructure.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AdvisorID");
-
-                    b.HasIndex("ClientID");
-
                     b.ToTable("advisorClients");
                 });
 
@@ -340,25 +336,6 @@ namespace Advisor.Infrastructure.Migrations
                     b.ToTable("Usersd");
                 });
 
-            modelBuilder.Entity("Advisor.Core.Domain.Models.AdvisorClient", b =>
-                {
-                    b.HasOne("Advisor.Core.Domain.Models.Users", "Advisor")
-                        .WithMany("AdvisorList")
-                        .HasForeignKey("AdvisorID")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Advisor.Core.Domain.Models.Users", "Client")
-                        .WithMany("ClientList")
-                        .HasForeignKey("ClientID")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Advisor");
-
-                    b.Navigation("Client");
-                });
-
             modelBuilder.Entity("Advisor.Core.Domain.Models.InvestmentStrategy", b =>
                 {
                     b.HasOne("Advisor.Core.Domain.Models.InvestmentType", "InvestmentTypes")
@@ -411,10 +388,6 @@ namespace Advisor.Infrastructure.Migrations
 
             modelBuilder.Entity("Advisor.Core.Domain.Models.Users", b =>
                 {
-                    b.Navigation("AdvisorList");
-
-                    b.Navigation("ClientList");
-
                     b.Navigation("investorInfos");
                 });
 #pragma warning restore 612, 618

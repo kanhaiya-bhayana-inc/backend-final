@@ -45,6 +45,19 @@ namespace Advisor.Core.Services
             }
         }
 
+        public string CreateClient(AddUserDto request)
+        {
+            try
+            {
+                var res = _userRepository.CreateClient (request);
+                return res;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public Task<Users> CreateUser(AddUserDto request)
         {
             try
@@ -64,6 +77,45 @@ namespace Advisor.Core.Services
             {
                 var res = _userRepository.ForgotPasswordUser(email);
                 return res;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Task<List<GetAllClientDTOs>?> GetAllClients(int id)
+        {
+            try
+            {
+                var users = _userRepository.GetAllClients(id);
+                return Task.FromResult(users);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Task<List<int>?> GetAllIDS(int id)
+        {
+            try
+            {
+                var users = _userRepository.GetAllIDS(id);
+                return Task.FromResult(users);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Task<GetUserDto?> GetUserByAuth()
+        {
+            try
+            {
+                var res = _userRepository.GetUserByAuth();
+                return Task.FromResult(res);
             }
             catch (Exception)
             {
