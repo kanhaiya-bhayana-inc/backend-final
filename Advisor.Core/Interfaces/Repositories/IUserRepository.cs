@@ -13,7 +13,8 @@ namespace Advisor.Core.Interfaces.Repositories
         GetUserDto? GetUserByAuth();
         Users CreateUser(AddUserDto request);
         string CreateClient(AddUserDto request);
-        string Login(AuthAdvisorDto request);
+        string LoginAdvisor(AuthAdvisorDto request);
+        string LoginClient(AuthAdvisorDto request);
         string AdvisorAccVerify(string token);
 
         UpdateUserDto? UpdateUser(string id,UpdateUserDto request);

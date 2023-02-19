@@ -174,32 +174,70 @@ namespace Advisor.Infrastructure.Repository
             return "Advisor Verified Successfully";
         }
 
-        public string Login(AuthAdvisorDto request)
+        public string LoginAdvisor(AuthAdvisorDto request)
         {
             try
             {
                 Users advObj = _userDbContext.Usersd.FirstOrDefault(u => u.Email == request.Email);
-                if (advObj is null)
+                if (advObj != null && advObj.AdvisorID != null)
+                {
+
+
+                    if (!VerifyPasswordHash(request.Password, advObj.PasswordHash, advObj.PasswordSalt))
+                    {
+                        return "Wrong password.";
+                    }
+                    if (advObj.VerifiedAt == null)
+                    {
+                        return "Not Verified yet";
+                    }
+                    string token = CreateToken(advObj);
+                    //var refreshToken = GenerateRefreshToken();
+                    //SetRefreshToken(refreshToken);
+                    //var userName = _userDbContext.AdvisorInfos.Identity?.Name;
+                    return token;
+                }
+                else
                 {
                     return "Advisor not found.";
                 }
-                if (!VerifyPasswordHash(request.Password, advObj.PasswordHash, advObj.PasswordSalt))
-                {
-                    return "Wrong password.";
-                }
-                if (advObj.VerifiedAt == null)
-                {
-                    return "Not Verified yet";
-                }
-                string token = CreateToken(advObj);
-                //var refreshToken = GenerateRefreshToken();
-                //SetRefreshToken(refreshToken);
-                //var userName = _userDbContext.AdvisorInfos.Identity?.Name;
-                return token;
             }
             catch (Exception) { throw; }
 
             
+        }
+
+        public string LoginClient(AuthAdvisorDto request)
+        {
+            try
+            {
+                Users advObj = _userDbContext.Usersd.FirstOrDefault(u => u.Email == request.Email);
+                if (advObj != null && advObj.ClientID != null)
+                {
+
+
+                    if (!VerifyPasswordHash(request.Password, advObj.PasswordHash, advObj.PasswordSalt))
+                    {
+                        return "Wrong password.";
+                    }
+                    if (advObj.VerifiedAt == null)
+                    {
+                        return "Not Verified yet";
+                    }
+                    string token = CreateToken(advObj);
+                    //var refreshToken = GenerateRefreshToken();
+                    //SetRefreshToken(refreshToken);
+                    //var userName = _userDbContext.AdvisorInfos.Identity?.Name;
+                    return token;
+                }
+                else
+                {
+                    return "Client not found.";
+                }
+            }
+            catch (Exception) { throw; }
+
+
         }
 
         public string AdvisorAccVerify(string token)

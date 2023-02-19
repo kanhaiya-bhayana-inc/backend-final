@@ -18,7 +18,8 @@ namespace Advisor.Core.Interfaces.Services
         Task<Users> CreateUser(AddUserDto request);
         string CreateClient(AddUserDto request);
 
-        string Login(AuthAdvisorDto request);
+        string LoginAdvisor(AuthAdvisorDto request);
+        string LoginClient(AuthAdvisorDto request);
 
         string AdvisorAccVerify(string token);
 

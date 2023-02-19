@@ -51,12 +51,23 @@ namespace Advisor.API.Controllers
             return Ok(result);
         }
 
-        [HttpPost("user-login")]
+        [HttpPost("adv-login")]
 
-        public async Task<ActionResult<string>> Login(AuthAdvisorDto request)
+        public async Task<ActionResult<string>> LoginAdvisor(AuthAdvisorDto request)
         {
-            var result = _userService.Login(request);
+            var result = _userService.LoginAdvisor(request);
             if (result.Equals("Advisor not found.") || result.Equals("Wrong password.") || result.Equals("Not Verified yet"))
+                return NotFound(result);
+
+            return Ok(result);
+        }
+
+        [HttpPost("client-login")]
+
+        public async Task<ActionResult<string>> LoginClient(AuthAdvisorDto request)
+        {
+            var result = _userService.LoginClient(request);
+            if (result.Equals("Client not found.") || result.Equals("Wrong password.") || result.Equals("Not Verified yet"))
                 return NotFound(result);
 
             return Ok(result);
@@ -73,7 +84,7 @@ namespace Advisor.API.Controllers
             return Ok(res);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("update-user-advisor/{id}")]
         public async Task<ActionResult<UpdateUserDto>> UpdateUser(string id, UpdateUserDto request)
         {
             var result = _userService.UpdateUser(id, request);

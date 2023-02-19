@@ -123,11 +123,24 @@ namespace Advisor.Core.Services
             }
         }
 
-        public string Login(AuthAdvisorDto request)
+        public string LoginAdvisor(AuthAdvisorDto request)
         {
             try
             {
-                var obj = _userRepository.Login(request);
+                var obj = _userRepository.LoginAdvisor(request);
+                return obj;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public string LoginClient(AuthAdvisorDto request)
+        {
+            try
+            {
+                var obj = _userRepository.LoginClient(request);
                 return obj;
             }
             catch (Exception)
