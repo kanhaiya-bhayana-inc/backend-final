@@ -104,9 +104,9 @@ namespace Advisor.API.Controllers
         }
 
         [HttpPost("forgot-password")]
-        public async Task<ActionResult<string>> ForgotPasswordUser(string emial)
+        public async Task<ActionResult<string>> ForgotPasswordUser(string email)
         {
-            var res = _userService.ForgotPasswordUser(emial);
+            var res = _userService.ForgotPasswordUser(email);
             if (res.Equals("Advisor not found"))
                 return BadRequest(res);
             return Ok(res);

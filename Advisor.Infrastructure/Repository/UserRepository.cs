@@ -322,7 +322,7 @@ namespace Advisor.Infrastructure.Repository
                 var obj = _userDbContext.Usersd.FirstOrDefault(u => u.Email == email);
                 if (obj == null)
                 {
-                    return "Advisor not found";
+                    return "Email not found";
                 }
                 obj.PasswordResetToken = CreateRandomToken();
                 obj.ResetTokenExpires = DateTime.Now.AddMinutes(20);
