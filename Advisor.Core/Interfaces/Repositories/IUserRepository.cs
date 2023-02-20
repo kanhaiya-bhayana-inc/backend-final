@@ -11,6 +11,13 @@ namespace Advisor.Core.Interfaces.Repositories
     public interface IUserRepository
     {
         GetUserDto? GetUserByAuth();
+        GetClientUserDto? GetClientUserById(int id); // shivam 19Feb
+
+        UpdateUserDto? UpdateClientUser(int id, UpdateUserDto request); // shivam
+
+        string DeleteUser(int id); // shivam
+
+        string DeleteClientUser(int id); // shivam
         Users CreateUser(AddUserDto request);
         string CreateClient(AddUserDto request);
         string LoginAdvisor(AuthAdvisorDto request);

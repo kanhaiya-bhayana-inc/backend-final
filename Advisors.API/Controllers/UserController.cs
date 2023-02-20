@@ -125,7 +125,7 @@ namespace Advisor.API.Controllers
         {
             var obj = await _userService.GetAllClients(id);
             if (obj == null)
-                return NotFound("Advisor Not found");
+                return NotFound("Clients Not found");
             return Ok(obj) ;
         }
 
@@ -133,6 +133,49 @@ namespace Advisor.API.Controllers
         public async Task<ActionResult<List<int>>> GetAllIDS(int id)
         {
             return await _userService.GetAllIDS(id);
+        }
+
+
+        [HttpGet("Get-Client-by/{id}")]  // shivam 19Feb
+        public async Task<ActionResult<GetClientUserDto>> GetClientUserById(int id)
+        {
+            var res = _userService.GetClientUserById(id);
+            if (res == null) { return NotFound("Client Doesn't exist"); }
+
+            return Ok(res);
+        }
+
+        [HttpPut("Update-Client/{id}")] // shivam
+
+        public async Task<ActionResult<UpdateUserDto>> UpdateClientUser(int id, UpdateUserDto request)
+        {
+            var result = _userService.UpdateClientUser(id, request);
+            if (result is null)
+                return NotFound("CLient not Found");
+            return Ok(result);
+        }
+
+
+        [HttpDelete("Delete-user/{id}")] // shivam
+
+        public async Task<ActionResult<string>> DeleteUser(int id)
+        {
+            var result = _userService.DeleteUser(id);
+            if (result is null)
+                return NotFound("User not found");
+
+            return Ok(result);
+        }
+
+        [HttpDelete("Delete-Client/{id}")] // shivam
+
+        public async Task<ActionResult<string>> DeleteClientUser(int id)
+        {
+            var result = _userService.DeleteClientUser(id);
+            if (result is null)
+                return NotFound("Client not found");
+
+            return Ok(result);
         }
 
     }

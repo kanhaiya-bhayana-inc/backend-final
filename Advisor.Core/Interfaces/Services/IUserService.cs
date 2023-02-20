@@ -11,6 +11,14 @@ namespace Advisor.Core.Interfaces.Services
     public interface IUserService
     {
         Task<GetUserDto?> GetUserByAuth();
+
+        GetClientUserDto? GetClientUserById(int id); // shivam 19Feb
+
+        UpdateUserDto? UpdateClientUser(int id, UpdateUserDto request); // shivam
+
+        string DeleteUser(int id); // shivam
+
+        string DeleteClientUser(int id); // shivam
         Task<List<GetAllClientDTOs>?> GetAllClients(int id);
         Task<List<int>?> GetAllIDS(int id);
 

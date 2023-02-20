@@ -174,6 +174,59 @@ namespace Advisor.Core.Services
                 throw;
             }
         }
+
+        public GetClientUserDto? GetClientUserById(int id)  // shivam 19Feb
+        {
+            try
+            {
+                var result = _userRepository.GetClientUserById(id);
+
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public string DeleteClientUser(int id) // shivam
+        {
+            try
+            {
+                var obj = _userRepository.DeleteClientUser(id);
+
+                return obj;
+            }
+            catch (Exception) { throw; }
+        }
+
+        public UpdateUserDto? UpdateClientUser(int id, UpdateUserDto request)
+        {
+            try
+            {
+                var obj = _userRepository.UpdateClientUser(id, request);
+                return obj;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        } // shivam
+
+
+        public string DeleteUser(int id)
+        {
+            try
+            {
+                var obj = _userRepository.DeleteUser(id);
+
+                return obj;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        } //shivam
     }
     
 }

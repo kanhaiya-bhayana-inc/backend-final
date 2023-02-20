@@ -508,6 +508,121 @@ namespace Advisor.Infrastructure.Repository
 
 
         }
+
+
+        public UpdateUserDto? UpdateClientUser(int id, UpdateUserDto request) // shivam
+        {
+            try
+            {
+                var objuser = _userDbContext.Usersd.FirstOrDefault(x => x.UserID == (id));
+                if (objuser != null && objuser.ClientID != null)
+                {
+
+
+
+                    objuser.FirstName = request.FirstName;
+                    objuser.LastName = request.LastName;
+                    objuser.Email = request.Email;
+                    objuser.Address = request.Address;
+                    objuser.City = request.City;
+                    objuser.State = request.State;
+                    objuser.Company = request.Company;
+                    objuser.Phone = request.Phone;
+                    objuser.ModifiedDate = DateTime.Now;
+                    objuser.SortName = request.LastName + ", " + request.FirstName;
+
+                    _userDbContext.SaveChanges();
+                    /* AdvisorInfoToReturn toreturn = new AdvisorInfoToReturn();
+                    toreturn.Username = request.Username;
+                    toreturn.Email = request.Email;*/
+
+
+                    return request;
+                }
+                return null;
+
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public string DeleteUser(int id)  // shivam
+        {
+            try
+            {
+                var obj = _userDbContext.Usersd.FirstOrDefault(x => x.UserID == (id));
+
+                if (obj != null && obj.AdvisorID != null)
+                {
+
+
+                    _userDbContext.Usersd.Remove(obj);
+                    _userDbContext.SaveChanges();
+
+                    return "User Deleted!";
+                }
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public string DeleteClientUser(int id)   // shivam
+        {
+            try
+            {
+                var obj = _userDbContext.Usersd.FirstOrDefault(x => x.UserID == (id));
+
+                if (obj != null && obj.ClientID != null)
+                {
+
+                    _userDbContext.Usersd.Remove(obj);
+                    _userDbContext.SaveChanges();
+
+                    return "Client Deleted!";
+                }
+                return null;
+            
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public GetClientUserDto? GetClientUserById(int id) // shivam 19Feb
+        {
+            try
+            {
+                var res = _userDbContext.Usersd.FirstOrDefault(x => x.UserID == (id));
+                if (res != null && res.ClientID != null)
+                {
+
+                    GetClientUserDto obj = new GetClientUserDto();
+                    obj.ClientID = res.ClientID;
+                    obj.SortName = res.SortName;
+                    obj.Email = res.Email;
+                    obj.Phone = res.Phone;
+
+                    return obj;
+                }
+                return null;
+            
+
+
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
 
