@@ -446,6 +446,13 @@ namespace Advisor.Infrastructure.Repository
                 obj.Email = res.Email;
                 obj.AdvisorID = res.AdvisorID;
                 obj.Phone = res.Phone;
+                obj.Address = res.Address;
+                obj.FirstName= res.FirstName;
+                obj.LastName = res.LastName;
+                obj.City = res.City;
+                obj.State = res.State;
+                obj.Company = res.Company;
+
                 return obj;
 
             }
@@ -461,7 +468,7 @@ namespace Advisor.Infrastructure.Repository
             {
                 /*var adv = _context.Users.First(x => x.Email == email);
                 var advid = adv.UserID;*/
-                var flag = _userDbContext.advisorClients.Any(x => x.ID == id);
+                var flag = _userDbContext.advisorClients.Any(x => x.AdvisorID == id);
                 if (!flag) { return null; }
 
                 List<AdvisorClient> clients = _userDbContext.advisorClients.Where(x => x.AdvisorID == id).ToList();
@@ -476,13 +483,17 @@ namespace Advisor.Infrastructure.Repository
                 {
                     GetAllClientDTOs clientInfo = new GetAllClientDTOs();
                     Users Client = _userDbContext.Usersd.First(c => c.UserID == i);
-                    clientInfo.UserID = i;
-                    clientInfo.Address = Client.Address;
-                    clientInfo.ClientID = Client.ClientID;
-                    clientInfo.Email = Client.Email;
-                    clientInfo.SortName = Client.SortName;
-                    clientInfo.Phone = Client.Phone;
-                    list.Add(clientInfo);
+                    if (Client.DeletedFlag == 0)
+                    {
+                        clientInfo.UserID = i;
+                        clientInfo.Address = Client.Address;
+                        clientInfo.ClientID = Client.ClientID;
+                        clientInfo.Email = Client.Email;
+                        clientInfo.SortName = Client.SortName;
+                        clientInfo.Phone = Client.Phone;
+                        list.Add(clientInfo);
+                    }
+                    
                 }
                 
                 return list;
@@ -581,7 +592,9 @@ namespace Advisor.Infrastructure.Repository
                 if (obj != null && obj.ClientID != null)
                 {
 
-                    _userDbContext.Usersd.Remove(obj);
+                    //_userDbContext.Usersd.Remove(obj);
+                    obj.DeletedFlag = 1;
+                    obj.Active = 0;
                     _userDbContext.SaveChanges();
 
                     return "Client Deleted!";

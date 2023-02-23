@@ -84,7 +84,7 @@ namespace Advisor.API.Controllers
             return Ok(res);
         }
 
-        [HttpPut("update-user-advisor/{id}")]
+        [HttpPut("update-user-advisor/{id}"),Authorize]
         public async Task<ActionResult<UpdateUserDto>> UpdateUser(string id, UpdateUserDto request)
         {
             var result = _userService.UpdateUser(id, request);
@@ -167,7 +167,7 @@ namespace Advisor.API.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("Delete-Client/{id}")] // shivam
+        [HttpDelete("Delete-Client/{id}"),Authorize] // shivam
 
         public async Task<ActionResult<string>> DeleteClientUser(int id)
         {
