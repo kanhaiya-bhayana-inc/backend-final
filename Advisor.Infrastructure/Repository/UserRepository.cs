@@ -618,10 +618,17 @@ namespace Advisor.Infrastructure.Repository
                 {
 
                     GetClientUserDto obj = new GetClientUserDto();
+                    obj.userID = res.UserID;
                     obj.ClientID = res.ClientID;
                     obj.SortName = res.SortName;
                     obj.Email = res.Email;
                     obj.Phone = res.Phone;
+                    obj.address = res.Address;
+                    obj.company = res.Company;
+                    obj.firstName = res.FirstName;
+                    obj.lastName = res.LastName;
+                    obj.city = res.City;
+                    obj.state = res.State;
 
                     return obj;
                 }

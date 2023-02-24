@@ -136,7 +136,7 @@ namespace Advisor.API.Controllers
         }
 
 
-        [HttpGet("Get-Client-by/{id}")]  // shivam 19Feb
+        [HttpGet("Get-Client-by/{id}"),Authorize]  // shivam 19Feb
         public async Task<ActionResult<GetClientUserDto>> GetClientUserById(int id)
         {
             var res = _userService.GetClientUserById(id);
@@ -145,7 +145,7 @@ namespace Advisor.API.Controllers
             return Ok(res);
         }
 
-        [HttpPut("Update-Client/{id}")] // shivam
+        [HttpPut("Update-Client/{id}"),Authorize] // shivam
 
         public async Task<ActionResult<UpdateUserDto>> UpdateClientUser(int id, UpdateUserDto request)
         {
