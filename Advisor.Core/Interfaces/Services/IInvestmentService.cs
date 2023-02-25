@@ -12,5 +12,7 @@ namespace Advisor.Core.Interfaces.Services
         Task<string> AddInvestment(InvestmentDTO request,int id);
         Task<string> UpdateInvestment(InvestmentDTO request, int infoID, int strtID, int advId);
         Task<string> DeleteInvestment(int infoID, int strtID);
+
+        Task<List<GetInvestments>?> GetuserInvestments(int uID);
     }
 }

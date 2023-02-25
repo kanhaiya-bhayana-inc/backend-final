@@ -38,6 +38,16 @@ namespace Advisor.Core.Services
             catch (Exception) { throw; }
         }
 
+        public Task<List<GetInvestments>?> GetuserInvestments(int uID)
+        {
+            try
+            {
+                var res = _investmentRepository.GetuserInvestments(uID);
+                return Task.FromResult(res);
+            }
+            catch (Exception) { throw; }
+        }
+
         public Task<string> UpdateInvestment(InvestmentDTO request, int infoID, int strtID, int advId)
         {
             try

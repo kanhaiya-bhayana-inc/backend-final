@@ -12,5 +12,7 @@ namespace Advisor.Core.Interfaces.Repositories
         string AddInvestment(InvestmentDTO request, int id);
         string UpdateInvestment(InvestmentDTO request, int infoID, int strtID, int advId);
         string DeleteInvestment(int infoID, int strtID);
+
+        List<GetInvestments>? GetuserInvestments(int uID);
     }
 }

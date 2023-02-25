@@ -51,5 +51,20 @@ namespace Advisor.API.Controllers
             }
             return Ok(res);
         }
+
+        [HttpGet("GetUserInvestments/{uID}"),Authorize]
+        public async Task<ActionResult<List<GetInvestments>>> GetuserInvestments(int uID)
+        {
+            try
+            {
+                var res = _investmetnService.GetuserInvestments(uID);
+                if (res is null)
+                {
+                    return BadRequest("Something went wrong");
+                }
+                return Ok(res);
+            }
+            catch(Exception) { throw; }
+        }
     }
 }

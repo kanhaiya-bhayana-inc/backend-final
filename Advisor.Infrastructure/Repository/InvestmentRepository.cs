@@ -142,5 +142,60 @@ namespace Advisor.Infrastructure.Repository
             }
             catch(Exception) { throw; }
         }
+
+        public List<GetInvestments>? GetuserInvestments(int uID)
+        {
+            try
+            {
+                var flag = _userDbContext.InvestorInfos.Any(x => x.UserID == uID);
+                Console.WriteLine("1stjkldjfldksjf");
+                if (!flag) { return null; }
+                Console.WriteLine("uuuuuuuu"); ;
+
+                List<InvestorInfo> userData = _userDbContext.InvestorInfos.Where(x =>x.UserID== uID).ToList();
+                List<int> userIDs = new List<int>();
+                List<GetInvestments> list = new List<GetInvestments>();
+
+                foreach (var x in userData)
+                {
+                    if (x.DeletedFlag == 0)
+                    {
+                        userIDs.Add(x.InvestorInfoID);
+
+                    }
+                }
+
+                foreach(int i in userIDs)
+                {
+                    Console.WriteLine("i-s->"+ i);
+                    GetInvestments clientInvestmentInfo = new GetInvestments();
+                    var strategy = _userDbContext.investmentStrategies.Where(x => x.InvestorInfoID == i).ToList();
+                    foreach (var s in strategy) {
+                        if (s.DeletedFlag == 0)
+                        {
+                            Console.WriteLine("jlfj"+s.InvestmentStrategyID);
+                            var info = _userDbContext.InvestorInfos.FirstOrDefault(x => x.InvestorInfoID == i);
+                            clientInvestmentInfo.investmentName = info.InvestmentName;
+                            clientInvestmentInfo.active = info.Active;
+                            clientInvestmentInfo.inofID = info.InvestorInfoID;
+
+                            var type = _userDbContext.InvestmentTypes.First(x=>x.InvestmentTypeID==s.InvestmentTypeID).InvestmentTypeName;
+                            clientInvestmentInfo.investmentName = type;
+                            clientInvestmentInfo.investmentAmount = s.InvestmentAmount;
+                            clientInvestmentInfo.strategyName = s.StrategyName;
+                            clientInvestmentInfo.acountID = s.AccountID;
+                            clientInvestmentInfo.totalAmount = 0;
+                            clientInvestmentInfo.strategyID = s.InvestmentStrategyID;
+                            list.Add(clientInvestmentInfo);
+                        }
+
+                    }
+                }
+                return list;
+            }
+            catch (Exception) { throw; }
+        }
+
+       
     }
 }
