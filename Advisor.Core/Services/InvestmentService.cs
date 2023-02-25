@@ -4,6 +4,7 @@ using Advisor.Core.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.Arm;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,6 +26,26 @@ namespace Advisor.Core.Services
                 return Task.FromResult(res);
             }
             catch(Exception) { throw; }
+        }
+
+        public Task<string> DeleteInvestment(int infoID, int strtID)
+        {
+            try
+            {
+                var res = _investmentRepository.DeleteInvestment(infoID, strtID);
+                return Task.FromResult(res);
+            }
+            catch (Exception) { throw; }
+        }
+
+        public Task<string> UpdateInvestment(InvestmentDTO request, int infoID, int strtID, int advId)
+        {
+            try
+            {
+                var res = _investmentRepository.UpdateInvestment(request, infoID,strtID,advId);
+                return Task.FromResult(res);
+            }
+            catch (Exception) { throw; }
         }
     }
 }

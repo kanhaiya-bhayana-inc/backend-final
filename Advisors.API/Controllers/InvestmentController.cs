@@ -23,7 +23,29 @@ namespace Advisor.API.Controllers
         public async Task<ActionResult<string>> AddInvestment(InvestmentDTO request, int id)
         {
             var res = await _investmetnService.AddInvestment(request,id);
-            if (res.Equals("Some error has occured, try again."))
+            if (res.Equals("Some error has occured with investment information, try again."))
+            {
+                return BadRequest(res);
+            }
+            return Ok(res);
+        }
+
+        [HttpPost("advisorUpdateinvestment/{infoID}/{strtID}/{advId}"), Authorize]
+        public async Task<ActionResult<string>> UpdateInvestment(InvestmentDTO request, int infoID, int strtID, int advId)
+        {
+            var res = await _investmetnService.UpdateInvestment(request, infoID,strtID,advId);
+            if (res.Equals("Some error has occured with investment information, try again."))
+            {
+                return BadRequest(res);
+            }
+            return Ok(res);
+        }
+
+        [HttpDelete("advisorDeleteinvestment/{infoID}/{strtID}"), Authorize]
+        public async Task<ActionResult<string>> DeleteInvestment(int infoID, int strtID)
+        {
+            var res = await _investmetnService.DeleteInvestment(infoID, strtID);
+            if (res.Equals("Something went wrong, try again later or contact admin."))
             {
                 return BadRequest(res);
             }

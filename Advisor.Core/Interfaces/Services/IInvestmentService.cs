@@ -10,5 +10,7 @@ namespace Advisor.Core.Interfaces.Services
     public interface IInvestmentService
     {
         Task<string> AddInvestment(InvestmentDTO request,int id);
+        Task<string> UpdateInvestment(InvestmentDTO request, int infoID, int strtID, int advId);
+        Task<string> DeleteInvestment(int infoID, int strtID);
     }
 }
