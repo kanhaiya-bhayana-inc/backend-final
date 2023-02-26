@@ -12,15 +12,15 @@ namespace Advisor.Core.Domain.DTOS
 
         public int strategyID { get; set; }
 
-        public string? investmentName { get; set; }
-        public string? typeName { get; set; }
-        public string? strategyName { get; set; }
+        public string? InvestmentName { get; set; }
+        public string? InvestmentTypeName { get; set; }
+        public string? StrategyName { get; set; }
 
-        public int active { get; set;}
+        public int Active { get; set;}
 
         public decimal? totalAmount { get;set; }
-        public string? acountID { get; set;}
+        public string? AccountID { get; set;}
 
-        public decimal? investmentAmount { get;set; }
+        public decimal? InvestmentAmount { get;set; }
     }
 }

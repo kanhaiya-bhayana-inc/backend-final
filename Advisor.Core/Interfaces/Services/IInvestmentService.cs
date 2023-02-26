@@ -14,5 +14,8 @@ namespace Advisor.Core.Interfaces.Services
         Task<string> DeleteInvestment(int infoID, int strtID);
 
         Task<List<GetInvestments>?> GetuserInvestments(int uID);
+        Task<GetInvestments?> GetSingleInvestment(int infoID, int strtID);
+
+        Task<string?> TotalAmount(int uID);
     }
 }

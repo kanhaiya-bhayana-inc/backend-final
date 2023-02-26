@@ -30,7 +30,7 @@ namespace Advisor.API.Controllers
             return Ok(res);
         }
 
-        [HttpPost("advisorUpdateinvestment/{infoID}/{strtID}/{advId}"), Authorize]
+        [HttpPut("advisorUpdateinvestment/{infoID}/{strtID}/{advId}"), Authorize]
         public async Task<ActionResult<string>> UpdateInvestment(InvestmentDTO request, int infoID, int strtID, int advId)
         {
             var res = await _investmetnService.UpdateInvestment(request, infoID,strtID,advId);
@@ -65,6 +65,38 @@ namespace Advisor.API.Controllers
                 return Ok(res);
             }
             catch(Exception) { throw; }
+        }
+
+
+        [HttpGet("GetSingleInvestment/{infoID}/{strtID}"),Authorize]
+        public async Task<ActionResult<GetInvestments>> GetSingleInvestment(int infoID, int strtID)
+        {
+            try
+            {
+                var res = _investmetnService.GetSingleInvestment(infoID, strtID);
+                if (res is null)
+                {
+                    return BadRequest("Something went wrong, try again.");
+                }
+                return Ok(res);
+            }
+            catch(Exception) { throw; }
+        }
+
+        [HttpGet("GetTotalAmount/{uID}"),Authorize]
+
+        public async Task<ActionResult<string>> TotalAmount(int uID)
+        {
+            try
+            {
+                var res = _investmetnService.TotalAmount(uID);
+                if (res is null)
+                {
+                    return BadRequest("Something went wrong with total investments");
+                }
+                return Ok(res);
+            }
+            catch(Exception) { throw; } 
         }
     }
 }

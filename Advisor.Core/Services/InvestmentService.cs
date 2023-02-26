@@ -38,11 +38,31 @@ namespace Advisor.Core.Services
             catch (Exception) { throw; }
         }
 
+        public Task<GetInvestments?> GetSingleInvestment(int infoID, int strtID)
+        {
+            try
+            {
+                var res = _investmentRepository.GetSingleInvestment(infoID, strtID);
+                return Task.FromResult(res);
+            }
+            catch (Exception) { throw; }
+        }
+
         public Task<List<GetInvestments>?> GetuserInvestments(int uID)
         {
             try
             {
                 var res = _investmentRepository.GetuserInvestments(uID);
+                return Task.FromResult(res);
+            }
+            catch (Exception) { throw; }
+        }
+
+        public Task<string?> TotalAmount(int uID)
+        {
+            try
+            {
+                var res = _investmentRepository.TotalAmount(uID);
                 return Task.FromResult(res);
             }
             catch (Exception) { throw; }

@@ -175,16 +175,16 @@ namespace Advisor.Infrastructure.Repository
                         {
                             Console.WriteLine("jlfj"+s.InvestmentStrategyID);
                             var info = _userDbContext.InvestorInfos.FirstOrDefault(x => x.InvestorInfoID == i);
-                            clientInvestmentInfo.investmentName = info.InvestmentName;
-                            clientInvestmentInfo.active = info.Active;
+                            clientInvestmentInfo.InvestmentName = info.InvestmentName;
+                            clientInvestmentInfo.Active = info.Active;
                             clientInvestmentInfo.inofID = info.InvestorInfoID;
 
                             var type = _userDbContext.InvestmentTypes.First(x=>x.InvestmentTypeID==s.InvestmentTypeID).InvestmentTypeName;
-                            clientInvestmentInfo.investmentName = type;
-                            clientInvestmentInfo.investmentAmount = s.InvestmentAmount;
-                            clientInvestmentInfo.strategyName = s.StrategyName;
-                            clientInvestmentInfo.acountID = s.AccountID;
+                            clientInvestmentInfo.InvestmentAmount = s.InvestmentAmount;
+                            clientInvestmentInfo.StrategyName = s.StrategyName;
+                            clientInvestmentInfo.AccountID = s.AccountID;
                             clientInvestmentInfo.totalAmount = 0;
+                            clientInvestmentInfo.InvestmentTypeName = type;
                             clientInvestmentInfo.strategyID = s.InvestmentStrategyID;
                             list.Add(clientInvestmentInfo);
                         }
@@ -192,6 +192,73 @@ namespace Advisor.Infrastructure.Repository
                     }
                 }
                 return list;
+            }
+            catch (Exception) { throw; }
+        }
+
+        public GetInvestments? GetSingleInvestment(int infoID, int strtID)
+        {
+            try
+            {
+                var obj = _userDbContext.InvestorInfos.FirstOrDefault(x => x.InvestorInfoID == infoID);
+                var obj2 = _userDbContext.investmentStrategies.FirstOrDefault(x => x.InvestmentStrategyID== strtID);
+                var obj3 = _userDbContext.InvestmentTypes.FirstOrDefault(x => x.InvestmentTypeID == obj2.InvestmentTypeID);
+                if (obj is null || obj2 is null || obj3 is null) { return null; }
+
+                GetInvestments data = new GetInvestments();
+                data.inofID = obj.InvestorInfoID;
+                data.Active = obj.Active;
+                data.InvestmentName = obj.InvestmentName;
+                data.InvestmentTypeName = obj3.InvestmentTypeName;
+                data.AccountID = obj2.AccountID;
+                data.StrategyName = obj2.StrategyName;
+                data.strategyID = obj2.InvestmentStrategyID;
+                data.totalAmount = 0;
+                data.InvestmentAmount = obj2.InvestmentAmount;
+
+                return data;
+            }
+            catch(Exception) { throw; }
+
+        }
+
+
+        public string TotalAmount(int uID)
+        {
+            try
+            {
+                decimal ans = 0;
+                var flag = _userDbContext.InvestorInfos.Any(x => x.UserID == uID);
+                Console.WriteLine("1stjkldjfldksjf");
+                if (!flag) { return null; }
+
+                List<InvestorInfo> userData = _userDbContext.InvestorInfos.Where(x => x.UserID == uID).ToList();
+                List<int> userIDs = new List<int>();
+                List<GetInvestments> list = new List<GetInvestments>();
+
+                foreach (var x in userData)
+                {
+                    if (x.DeletedFlag == 0)
+                    {
+                        userIDs.Add(x.InvestorInfoID);
+
+                    }
+                }
+                foreach (int i in userIDs)
+                {
+                    var strategy = _userDbContext.investmentStrategies.Where(x => x.InvestorInfoID == i).ToList();
+                    foreach (var s in strategy)
+                    {
+                        if (s.DeletedFlag == 0)
+                        {
+
+                            ans += s.InvestmentAmount;
+                            
+                        }
+
+                    }
+                }
+                return ans.ToString();
             }
             catch (Exception) { throw; }
         }

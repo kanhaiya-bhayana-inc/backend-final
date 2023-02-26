@@ -14,5 +14,10 @@ namespace Advisor.Core.Interfaces.Repositories
         string DeleteInvestment(int infoID, int strtID);
 
         List<GetInvestments>? GetuserInvestments(int uID);
+
+        GetInvestments? GetSingleInvestment(int infoID, int strtID);
+
+        string TotalAmount(int uID);
+
     }
 }
