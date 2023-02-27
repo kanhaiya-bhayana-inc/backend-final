@@ -36,7 +36,7 @@ namespace Advisor.Infrastructure.Repository
         {
             try
             {
-                if (_userDbContext.Usersd.Any(u => u.Email == request.Email)) { return null; }
+                if (_userDbContext.Usersd.Any(u => u.Email == request.Email && u.DeletedFlag == 0)) { return null; }
                 CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
                 var advId = CreateAdvId();
@@ -178,8 +178,8 @@ namespace Advisor.Infrastructure.Repository
         {
             try
             {
-                Users advObj = _userDbContext.Usersd.FirstOrDefault(u => u.Email == request.Email);
-                if (advObj != null && advObj.AdvisorID != null)
+                Users advObj = _userDbContext.Usersd.FirstOrDefault(u => u.Email == request.Email && u.DeletedFlag == 0);
+                if (advObj != null && advObj.AdvisorID != null && advObj.DeletedFlag != 1)
                 {
 
 
@@ -364,7 +364,7 @@ namespace Advisor.Infrastructure.Repository
             try
             {
                 string errMsg = "Without advisor client cann't be created.";
-                if (_userDbContext.Usersd.Any(u => u.Email == request.Email)) { return "this client already created by another advisor, try another one."; }
+                if (_userDbContext.Usersd.Any(u => u.Email == request.Email && u.DeletedFlag == 0)) { return "this client already created by another advisor, try another one."; }
                 CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
                 var advId = string.Empty;
                 if (_httpContextAccessor.HttpContext != null)
