@@ -136,9 +136,10 @@ namespace Advisor.Infrastructure.Repository
 
         private string CreateAdvId()
         {
-            const string chars = "a1bc2de3fg5h6i7j4k8l9mn0opqrstuvwxyz";
-            var newId = new string(Enumerable.Repeat(chars, 6)
+            const string chars = "A1B2CDEFGHIJKL34567MNOPQRST89UVWXYZ";
+            var newId = new string(Enumerable.Repeat(chars, 5)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
+            newId = "A" + newId;
             var res = _userDbContext.Usersd.Any(u => u.AdvisorID == newId);
             if (res == true)
             {
@@ -149,9 +150,10 @@ namespace Advisor.Infrastructure.Repository
 
         private string createClientID()
         {
-            const string chars = "a1bc2de3fg5h6i7j4k8l9mn0opqrstuvwxyz";
-            var newId = new string(Enumerable.Repeat(chars, 6)
+            const string chars = "ZYXWVU98TSRQPONM76543LKJIHGFEDC2B1A";
+            var newId = new string(Enumerable.Repeat(chars, 5)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
+            newId = "C" + newId;
             var res = _userDbContext.Usersd.Any(u => u.AdvisorID == newId);
             if (res == true)
             {
