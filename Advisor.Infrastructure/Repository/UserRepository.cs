@@ -154,7 +154,7 @@ namespace Advisor.Infrastructure.Repository
             var newId = new string(Enumerable.Repeat(chars, 5)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
             newId = "C" + newId;
-            var res = _userDbContext.Usersd.Any(u => u.AdvisorID == newId);
+            var res = _userDbContext.Usersd.Any(u => u.ClientID == newId);
             if (res == true)
             {
                 createClientID();
