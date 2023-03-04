@@ -1,0 +1,12 @@
+C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisor.Core\bin\Release\net6.0\Advisor.Core.deps.json
+C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisor.Core\bin\Release\net6.0\Advisor.Core.dll
+C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisor.Core\bin\Release\net6.0\Advisor.Core.pdb
+C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisor.Core\obj\Release\net6.0\Advisor.Core.csproj.AssemblyReference.cache
+C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisor.Core\obj\Release\net6.0\Advisor.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisor.Core\obj\Release\net6.0\Advisor.Core.AssemblyInfoInputs.cache
+C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisor.Core\obj\Release\net6.0\Advisor.Core.AssemblyInfo.cs
+C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisor.Core\obj\Release\net6.0\Advisor.Core.csproj.CoreCompileInputs.cache
+C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisor.Core\obj\Release\net6.0\Advisor.Core.dll
+C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisor.Core\obj\Release\net6.0\refint\Advisor.Core.dll
+C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisor.Core\obj\Release\net6.0\Advisor.Core.pdb
+C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisor.Core\obj\Release\net6.0\ref\Advisor.Core.dll

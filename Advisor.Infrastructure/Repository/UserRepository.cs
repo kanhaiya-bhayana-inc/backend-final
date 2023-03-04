@@ -329,7 +329,7 @@ namespace Advisor.Infrastructure.Repository
                 obj.PasswordResetToken = CreateRandomToken();
                 obj.ResetTokenExpires = DateTime.Now.AddMinutes(20);
                 _userDbContext.SaveChanges();
-                return "Change your password within 20 minutes.";
+                return $"{obj.PasswordResetToken}";
             }
             catch (Exception)
             {
@@ -355,7 +355,7 @@ namespace Advisor.Infrastructure.Repository
                 obj.PasswordResetToken = CreateRandomToken();
                 obj.ResetTokenExpires = DateTime.Now.AddMinutes(20);
                 _userDbContext.SaveChanges();
-                return $"Check you email: {email} inbox for changing the password.";
+                return $"{obj.PasswordResetToken}";
                 
             }
             catch (Exception) { throw; }
