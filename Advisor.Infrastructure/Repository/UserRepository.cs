@@ -265,6 +265,11 @@ namespace Advisor.Infrastructure.Repository
             try
             {
                 var objuser = _userDbContext.Usersd.FirstOrDefault(x => x.AdvisorID == (id));
+                var flag = _userDbContext.Usersd.FirstOrDefault(x => x.Email == request.Email);
+                if (flag != null && flag.AdvisorID != id)
+                {
+                    return null;
+                }
                 if (objuser is null)
                     return null;
 
@@ -528,7 +533,12 @@ namespace Advisor.Infrastructure.Repository
             try
             {
                 var objuser = _userDbContext.Usersd.FirstOrDefault(x => x.UserID == (id));
-                if (objuser != null && objuser.ClientID != null)
+                var flag = _userDbContext.Usersd.FirstOrDefault(x => x.Email== request.Email);
+                if (flag != null && flag.UserID != id)
+                {
+                    return null;
+                }
+                else if (objuser != null && objuser.ClientID != null)
                 {
 
 
