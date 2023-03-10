@@ -273,6 +273,7 @@ namespace Advisor.Infrastructure.Repository
                 if (objuser is null)
                     return null;
 
+                UpdateUserDto obj = new UpdateUserDto();
                 objuser.FirstName = request.FirstName;
                 objuser.LastName = request.LastName;
                 objuser.Email = request.Email;
@@ -285,12 +286,22 @@ namespace Advisor.Infrastructure.Repository
                 objuser.SortName = request.LastName + ", " + request.FirstName;
 
                 _userDbContext.SaveChanges();
+                obj.Email = objuser.Email;
+                obj.City = objuser.City;
+                obj.State = objuser.State;
+                obj.Company = objuser.Company;
+                obj.Phone = objuser.Phone;
+                obj.sortName = objuser.SortName;
+                obj.FirstName = objuser.FirstName;
+                obj.LastName = objuser.LastName;
+                obj.Address = objuser.Address;
+                obj.advisorID= objuser.AdvisorID;
                 /* AdvisorInfoToReturn toreturn = new AdvisorInfoToReturn();
                 toreturn.Username = request.Username;
                 toreturn.Email = request.Email;*/
 
 
-                return request;
+                return obj;
             }
             catch (Exception) { throw; }
         }
@@ -541,6 +552,7 @@ namespace Advisor.Infrastructure.Repository
                 else if (objuser != null && objuser.ClientID != null)
                 {
 
+                    UpdateUserDto obj = new UpdateUserDto();
 
 
                     objuser.FirstName = request.FirstName;
@@ -555,12 +567,24 @@ namespace Advisor.Infrastructure.Repository
                     objuser.SortName = request.LastName + ", " + request.FirstName;
 
                     _userDbContext.SaveChanges();
+                    obj.Email = objuser.Email;
+                    obj.City = objuser.City;
+                    obj.State = objuser.State;
+                    obj.Company = objuser.Company;
+                    obj.Phone = objuser.Phone;
+                    obj.sortName = objuser.SortName;
+                    obj.FirstName = objuser.FirstName;
+                    obj.LastName = objuser.LastName;
+                    obj.Address = objuser.Address;
+                    obj.clientID= objuser.ClientID;
+
+
                     /* AdvisorInfoToReturn toreturn = new AdvisorInfoToReturn();
                     toreturn.Username = request.Username;
                     toreturn.Email = request.Email;*/
 
 
-                    return request;
+                    return obj;
                 }
                 return null;
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwa0IcwafM0qEik/nw37+RgAAAAACAAAAAAADZgAAwAAAABAAAACnyl35WEt8OV3tlW9mrYhcAAAAAASAAACgAAAAEAAAAIu6bOflRREA46zg106xPkGAAAAAUry29LzmWEbJxP8PHglvFkujAyE8GZpaTmS4Am3m1KA8XZQtoU+9mxODQE1veDIZlBMAZLBynRc2KLalITS+GUNoGrMC9uqWkzxe+SdfpEvQyzKCqAyBG8Hrg8c/SOjHJ89iGlwZ7+ZAOcs3qH5GKMsDxB9QCIgFMpq3ZOAuVUsUAAAARVOWy6QCLk6r5hqhYuffoOMtfB4=</EncryptedPassword>
+    <History>False|2023-03-09T14:00:39.5576361Z;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <EFMigrations Include="Advisor.Infrastructure.Data.UserDbContext">
+      <Value>Data Source=tcp:incedo.database.windows.net,1433%3bInitial Catalog=assetadvisor%3bUser Id=admin-advisor%40incedo%3bPassword=Asset%24%40,2023</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

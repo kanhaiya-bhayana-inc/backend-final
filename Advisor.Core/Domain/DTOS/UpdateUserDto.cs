@@ -15,6 +15,10 @@ namespace Advisor.Core.Domain.DTOS
         [StringLength(50)]
         public string FirstName { get; set; } = null!;
 
+        public string clientID { get; set; } = string.Empty;
+        public string advisorID { get; set; } = string.Empty;
+        public string sortName { get; set; }
+
         [Required]
         [Column(TypeName = "VARCHAR")]
         [StringLength(50)]
