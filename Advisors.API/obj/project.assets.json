@@ -3961,11 +3961,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\priyanshu.gupta2\\OneDrive - Incedo Technology Solutions Ltd\\Desktop\\4WCP\\backend-final-master\\backend-final-master\\Advisors.API\\Advisor.API.csproj",
+      "projectUniqueName": "C:\\Users\\priyanshu.gupta2\\OneDrive - Incedo Technology Solutions Ltd\\Desktop\\4WCP\\backend-final\\Advisors.API\\Advisor.API.csproj",
       "projectName": "Advisor.API",
-      "projectPath": "C:\\Users\\priyanshu.gupta2\\OneDrive - Incedo Technology Solutions Ltd\\Desktop\\4WCP\\backend-final-master\\backend-final-master\\Advisors.API\\Advisor.API.csproj",
+      "projectPath": "C:\\Users\\priyanshu.gupta2\\OneDrive - Incedo Technology Solutions Ltd\\Desktop\\4WCP\\backend-final\\Advisors.API\\Advisor.API.csproj",
       "packagesPath": "C:\\Users\\priyanshu.gupta2\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\priyanshu.gupta2\\OneDrive - Incedo Technology Solutions Ltd\\Desktop\\4WCP\\backend-final-master\\backend-final-master\\Advisors.API\\obj\\",
+      "outputPath": "C:\\Users\\priyanshu.gupta2\\OneDrive - Incedo Technology Solutions Ltd\\Desktop\\4WCP\\backend-final\\Advisors.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\priyanshu.gupta2\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3982,11 +3982,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\priyanshu.gupta2\\OneDrive - Incedo Technology Solutions Ltd\\Desktop\\4WCP\\backend-final-master\\backend-final-master\\Advisor.Core\\Advisor.Core.csproj": {
-              "projectPath": "C:\\Users\\priyanshu.gupta2\\OneDrive - Incedo Technology Solutions Ltd\\Desktop\\4WCP\\backend-final-master\\backend-final-master\\Advisor.Core\\Advisor.Core.csproj"
+            "C:\\Users\\priyanshu.gupta2\\OneDrive - Incedo Technology Solutions Ltd\\Desktop\\4WCP\\backend-final\\Advisor.Core\\Advisor.Core.csproj": {
+              "projectPath": "C:\\Users\\priyanshu.gupta2\\OneDrive - Incedo Technology Solutions Ltd\\Desktop\\4WCP\\backend-final\\Advisor.Core\\Advisor.Core.csproj"
             },
-            "C:\\Users\\priyanshu.gupta2\\OneDrive - Incedo Technology Solutions Ltd\\Desktop\\4WCP\\backend-final-master\\backend-final-master\\Advisor.Infrastructure\\Advisor.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\priyanshu.gupta2\\OneDrive - Incedo Technology Solutions Ltd\\Desktop\\4WCP\\backend-final-master\\backend-final-master\\Advisor.Infrastructure\\Advisor.Infrastructure.csproj"
+            "C:\\Users\\priyanshu.gupta2\\OneDrive - Incedo Technology Solutions Ltd\\Desktop\\4WCP\\backend-final\\Advisor.Infrastructure\\Advisor.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\priyanshu.gupta2\\OneDrive - Incedo Technology Solutions Ltd\\Desktop\\4WCP\\backend-final\\Advisor.Infrastructure\\Advisor.Infrastructure.csproj"
             }
           }
         }

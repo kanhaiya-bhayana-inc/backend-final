@@ -46,3 +46,15 @@ C:\Users\priyanshu.gupta2\OneDrive - Incedo Technology Solutions Ltd\Desktop\4WC
 C:\Users\priyanshu.gupta2\OneDrive - Incedo Technology Solutions Ltd\Desktop\4WCP\backend-final-master\backend-final-master\Advisor.Core\obj\Debug\net6.0\refint\Advisor.Core.dll
 C:\Users\priyanshu.gupta2\OneDrive - Incedo Technology Solutions Ltd\Desktop\4WCP\backend-final-master\backend-final-master\Advisor.Core\obj\Debug\net6.0\Advisor.Core.pdb
 C:\Users\priyanshu.gupta2\OneDrive - Incedo Technology Solutions Ltd\Desktop\4WCP\backend-final-master\backend-final-master\Advisor.Core\obj\Debug\net6.0\ref\Advisor.Core.dll
+C:\Users\priyanshu.gupta2\OneDrive - Incedo Technology Solutions Ltd\Desktop\4WCP\backend-final\Advisor.Core\bin\Debug\net6.0\Advisor.Core.deps.json
+C:\Users\priyanshu.gupta2\OneDrive - Incedo Technology Solutions Ltd\Desktop\4WCP\backend-final\Advisor.Core\bin\Debug\net6.0\Advisor.Core.dll
+C:\Users\priyanshu.gupta2\OneDrive - Incedo Technology Solutions Ltd\Desktop\4WCP\backend-final\Advisor.Core\bin\Debug\net6.0\Advisor.Core.pdb
+C:\Users\priyanshu.gupta2\OneDrive - Incedo Technology Solutions Ltd\Desktop\4WCP\backend-final\Advisor.Core\obj\Debug\net6.0\Advisor.Core.csproj.AssemblyReference.cache
+C:\Users\priyanshu.gupta2\OneDrive - Incedo Technology Solutions Ltd\Desktop\4WCP\backend-final\Advisor.Core\obj\Debug\net6.0\Advisor.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\priyanshu.gupta2\OneDrive - Incedo Technology Solutions Ltd\Desktop\4WCP\backend-final\Advisor.Core\obj\Debug\net6.0\Advisor.Core.AssemblyInfoInputs.cache
+C:\Users\priyanshu.gupta2\OneDrive - Incedo Technology Solutions Ltd\Desktop\4WCP\backend-final\Advisor.Core\obj\Debug\net6.0\Advisor.Core.AssemblyInfo.cs
+C:\Users\priyanshu.gupta2\OneDrive - Incedo Technology Solutions Ltd\Desktop\4WCP\backend-final\Advisor.Core\obj\Debug\net6.0\Advisor.Core.csproj.CoreCompileInputs.cache
+C:\Users\priyanshu.gupta2\OneDrive - Incedo Technology Solutions Ltd\Desktop\4WCP\backend-final\Advisor.Core\obj\Debug\net6.0\Advisor.Core.dll
+C:\Users\priyanshu.gupta2\OneDrive - Incedo Technology Solutions Ltd\Desktop\4WCP\backend-final\Advisor.Core\obj\Debug\net6.0\refint\Advisor.Core.dll
+C:\Users\priyanshu.gupta2\OneDrive - Incedo Technology Solutions Ltd\Desktop\4WCP\backend-final\Advisor.Core\obj\Debug\net6.0\Advisor.Core.pdb
+C:\Users\priyanshu.gupta2\OneDrive - Incedo Technology Solutions Ltd\Desktop\4WCP\backend-final\Advisor.Core\obj\Debug\net6.0\ref\Advisor.Core.dll

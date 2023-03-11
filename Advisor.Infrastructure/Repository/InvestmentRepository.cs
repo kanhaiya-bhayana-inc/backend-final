@@ -124,23 +124,25 @@ namespace Advisor.Infrastructure.Repository
         {
             try
             {
-                var info = _userDbContext.InvestorInfos.FirstOrDefault(c => c.InvestorInfoID == (infoID));
-                var strtegy = _userDbContext.investmentStrategies.FirstOrDefault(c => c.InvestmentStrategyID == strtID);
-                if(strtegy != null && info != null)
+                if(_userDbContext.InvestorInfos!=null && _userDbContext.investmentStrategies != null)
                 {
-                    info.DeletedFlag = 1;
-                    info.Active = 0;
-                    _userDbContext.SaveChanges();
+                    var info = _userDbContext.InvestorInfos.FirstOrDefault(c => c.InvestorInfoID == (infoID));
+                    var strtegy = _userDbContext.investmentStrategies.FirstOrDefault(c => c.InvestmentStrategyID == strtID);
+                    if (strtegy != null && info != null && info.DeletedFlag == 0)
+                    {
+                        info.DeletedFlag = 1;
+                        info.Active = 0;
+                        _userDbContext.SaveChanges();
 
-                    strtegy.DeletedFlag = 1;
+                        strtegy.DeletedFlag = 1;
 
-                    _userDbContext.SaveChanges();
-                    return "Investment Deleted successfully";
+                        _userDbContext.SaveChanges();
+                        return "Investment Deleted successfully";
+                    }
                 }
                 return "Something went wrong, try again later or contact admin.";
-
             }
-            catch(Exception) { throw; }
+            catch (Exception) { throw; }
         }
 
         public List<GetInvestments>? GetuserInvestments(int uID)
@@ -148,7 +150,7 @@ namespace Advisor.Infrastructure.Repository
             try
             {
                 var flag = _userDbContext.InvestorInfos.Any(x => x.UserID == uID);
-                Console.WriteLine("1stjkldjfldksjf");
+                Console.WriteLine("1stjkldjfldksjf" + flag);
                 if (!flag) { return null; }
                 Console.WriteLine("uuuuuuuu"); ;
 
@@ -193,7 +195,7 @@ namespace Advisor.Infrastructure.Repository
                 }
                 return list;
             }
-            catch (Exception) { throw; }
+            catch (Exception) { Console.WriteLine("Priyanshu ");  throw; }
         }
 
         public GetInvestments? GetSingleInvestment(int infoID, int strtID)

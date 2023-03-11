@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "p0my9/FotaH7cf7WixpMTOfDiwIJTTxqGRX81dlK/GIaKRBcfbv2IHcIhqb9z3yIZTtE85jmLqo5p0iha2OaBw==",
+  "dgSpecHash": "0pEOAYHyzZJIXKDX1YBu3Ay7edYCLzM1r4U0jsl5wBihDl7Um0wZZmu/Km9Id5iil6y8wiDdRogGWdeMGLIk2g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\priyanshu.gupta2\\OneDrive - Incedo Technology Solutions Ltd\\Desktop\\4WCP\\backend-final-master\\backend-final-master\\Advisor.Infrastructure\\Advisor.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\priyanshu.gupta2\\OneDrive - Incedo Technology Solutions Ltd\\Desktop\\4WCP\\backend-final\\Advisor.Infrastructure\\Advisor.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\priyanshu.gupta2\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\priyanshu.gupta2\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
