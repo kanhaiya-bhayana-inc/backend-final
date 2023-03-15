@@ -3,6 +3,6 @@
   <PropertyGroup>
     <Controller_SelectedScaffolderID>ApiControllerEmptyScaffolder</Controller_SelectedScaffolderID>
     <Controller_SelectedScaffolderCategoryPath>root/Common/Api</Controller_SelectedScaffolderCategoryPath>
-    <NameOfLastUsedPublishProfile>C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisors.API\Properties\PublishProfiles\Asset-Advisor - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\kanhaiya.bhayana\Downloads\3-layer-arch--Investment-portal-advisor-master\Advisors.API\Properties\PublishProfiles\asset-advisors-be - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
